@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="sample-style.css">
+</head>
+<body>
+    <!-- Inline style -->
+    <p style="color: red;">Basang Basa sa Ulan by Aegis</p>
+    <!-- Internal style -->
+    <p id="italic">Reflection by Leah Salonga</p>
+    <!-- external style -->
+    <p class="text_wow">Emotions by Mariah Carrey</p>
+    <input type="text" name="" id="textbox1">
+    <input type="text" name="" id="textbox2">
+    <!-- <button type="submit" onclick="btn1()">Click Me</button> -->
+    <button type="submit" onclick="btn2()">Calculate</button>
+</body>
+<!-- javascript -->
+<script>
+    document.getElementById("textbox1").value;
+    // ECMAScropt Standard form of js syntax
+
+    // es5 function
+    function btn1 () {
+        // some code
+        var text = document.getElementById("textbox1").value;
+        alert(text);
+    }
+
+    // es6 function
+    const btn2 = () => {
+        // sone code
+        var text1 = document.getElementById("textbox1").value;
+        var text2 = document.getElementById("textbox2").value;
+        var sum = Math.ceil(text1) + Math.ceil(text2);
+        alert(sum);
+    }
+</script>
+<style>
+    /* for id, use # (pound sign) */
+    /* for classes, use = . (period) */
+    #italic {
+        text-align: center;
+        font-style: italic;
+    }
+</style>
+</html>
