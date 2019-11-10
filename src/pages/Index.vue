@@ -63,7 +63,7 @@
         
         
         <q-list bordered separator style="margin-top: 10px;">
-
+          <h4 class="text-center">Your BMI History</h4>
           <q-item class="musicList" clickable v-ripple v-for="(music, index) in musicList" :key="index">
             <q-item-section>
               <q-item-label>{{ index+1 }}: {{ music.songTitle }}</q-item-label>
