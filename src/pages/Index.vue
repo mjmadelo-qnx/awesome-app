@@ -2,22 +2,21 @@
   <q-page class="flex flex-center">
     <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg"> -->
     <template>
-      <div class="q-pa-md" style="max-width: 450px">
-        <h2>BMI Calculator</h2>
+      <div class="row" style="width: 80%">
         <!-- more direct declarative rendering -->
         <!-- {{ songTitle }} by {{ artist }} -->
 
         <!-- computed object declarative rendering -->
         <!-- {{ showSongAndArtist }} -->
-        
+
         <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
-        {{ showSongAndArtist }} -->
+        {{ showSongAndArtist }}-->
 
         <!-- <q-input outlined v-model="artist" label="Artist" />
-        <q-input outlined v-model="songTitle" label="Song Name" /> -->
+        <q-input outlined v-model="songTitle" label="Song Name" />-->
 
-        <q-card class="my-card">
+        <q-card class="my-card col" style="margin-right: 10px; padding: 10px;">
           <q-card-section>
             <div class="text-h6">Personal Information</div>
             <!-- <div class="text-subtitle2">by John Doe</div> -->
@@ -30,39 +29,33 @@
           <q-card-actions vertical>
             <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : editBmi()"/>
           </q-card-actions>
-        </q-card>
-
-        <q-card class="my-card" style="margin-top: 24px;">
           <q-card-section>
             <div class="text-h6">Calculated BMI</div>
             <p>height = {{height}}</p>
             <p>weight = {{weight}}</p>
             <p>BMI = {{ showCalculatedBMI() }}</p>
           </q-card-section>
-            
-          <q-separator />
-
-          <q-card-actions vertical>
-            
-          </q-card-actions>
         </q-card>
 
         <!-- first way -->
         <!-- <q-btn v-if="!edit" color="secondary" class="full-width" label="Add Music" @click="addMusic()"/>
-        <q-btn v-else color="primary" class="full-width" label="Update Music" @click="updateMusic()"/> -->
+        <q-btn v-else color="primary" class="full-width" label="Update Music" @click="updateMusic()"/>-->
 
         <!-- ternary operator syntax -->
         <!-- condition ? true result : false result -->
         <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Add Music' : 'Update Music'" @click="!edit ? addMusic() : updateMusic()"/> -->
-      
-        
+
         <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="calculateBmi()"/> -->
-        
-        
-        
+
         <q-list bordered separator style="margin-top: 10px;">
           <h4 class="text-center">Your BMI History</h4>
-          <q-item class="musicList" clickable v-ripple v-for="(music, index) in musicList" :key="index">
+          <q-item
+            class="musicList"
+            clickable
+            v-ripple
+            v-for="(music, index) in musicList"
+            :key="index"
+          >
             <q-item-section>
               <q-item-label>{{ index+1 }}: {{ music.songTitle }}</q-item-label>
               <q-item-label caption>{{ music.artist }}</q-item-label>
@@ -71,7 +64,7 @@
               <!-- edit -->
               <!-- <q-btn color="primary" icon="edit" @click="editMusic(music, music.id)"/> -->
               <!-- delete -->
-              <q-btn color="red" icon="delete" @click="deleteMusic(music.id)"/>
+              <q-btn color="red" icon="delete" @click="deleteMusic(music.id)" />
             </q-item-section>
           </q-item>
 
@@ -85,14 +78,14 @@
               <!-- <q-btn color="primary" icon="edit" @click="editBmi(bmi, bmi.id)"/> -->
               <!-- delete -->
               <q-btn color="red" icon="delete" @click="deleteMusic(bmi.id)"/>
+
             </q-item-section>
           </q-item>
 
           <!-- <q-item-section right>
             <q-btn color="primary" label="Add Music" @click="addMusic()"/>
             <q-btn color="secondary" label="Add Music" @click="addMusic()"/>
-          </q-item-section> -->
-
+          </q-item-section>-->
         </q-list>
       </div>
     </template>
@@ -100,14 +93,14 @@
 </template>
 
 <style>
-  .musicList {
-      padding: 8px 0px 8px 16px !important;
-  }
+.musicList {
+  padding: 8px 0px 8px 16px !important;
+}
 </style>
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: "PageIndex",
   // have a returned value
   // calculateBMI: {
   //   showCalculatedBMI () {
@@ -116,8 +109,10 @@ export default {
   // },
   computed: {
     // void
-    showSongAndArtist () {
-      return (this.songTitle && this.artist ? this.songTitle + " by " + this.artist : '');
+    showSongAndArtist() {
+      return this.songTitle && this.artist
+        ? this.songTitle + " by " + this.artist
+        : "";
     }
   },
   // calculatedBmi: {
@@ -125,12 +120,12 @@ export default {
   //     return (this.weight/(this.height*this.height));
   //   }
   // },
-  created () {
+  created() {
     this.$bind("bmiList", this.$db.collection("bmiList"));
   },
   // for void
   methods: {
-    addMusic () {
+    addMusic() {
       // use this kapag nasa loob ng script
       var obj = {
         artist: this.artist,
@@ -142,19 +137,19 @@ export default {
       this.cancelEdit();
       // this.$router.push('/login');
     },
-    addBmi () {
+    addBmi() {
       // use this kapag nasa loob ng script
       var obj = {
         name: this.name,
         height: this.height,
         weight: this.weight,
-        result: this.weight/(this.height*this.height),
+        result: this.weight / (this.height * this.height),
         weightRange: this.showWeightRange(this.showCalculatedBMI())
       };
       this.$db.collection("bmiList").add(obj);
       this.cancelEdit();
     },
-    cancelEdit () {
+    cancelEdit() {
       this.artist = "";
       this.songTitle = "";
       this.edit = false;
@@ -164,7 +159,7 @@ export default {
       this.height = "";
       this.weight = "";
     },
-    editMusic (d, i) {
+    editMusic(d, i) {
       this.artist = d.artist;
       this.songTitle = d.songTitle;
       this.edit = true;
@@ -188,9 +183,11 @@ export default {
 
       // delete (firestore)
       // delete from musicList where id = i (from function parameter)
+
       this.$db.collection("bmiList").doc(i).delete();
+
     },
-    updateMusic () {
+    updateMusic() {
       var obj = {
         artist: this.artist,
         songTitle: this.songTitle
@@ -202,12 +199,13 @@ export default {
       // vue.set(variable, index number, value)
       // this.$set(this.musicList, this.index, obj);
 
-      this.$db.collection("musicList")
-      .doc(this.index)
-      .update(obj);
+      this.$db
+        .collection("musicList")
+        .doc(this.index)
+        .update(obj);
       this.cancelEdit();
 
-      // 
+      //
     },
     updateBmi () {
       var obj = {
@@ -233,25 +231,25 @@ export default {
     },
     showCalculatedBMI () {
       console.log("hey!");
-      return (this.weight/(this.height*this.height));
+      return this.weight / (this.height * this.height);
     },
-    showWeightRange (BMI) {
+    showWeightRange(BMI) {
       // below 18.5 – you're in the underweight range
       // between 18.5 and 24.9 – you're in the healthy weight range
       // between 25 and 29.9 – you're in the overweight range
-      // between 30 and 39.9 – you're in the obese range 
+      // between 30 and 39.9 – you're in the obese range
       if (BMI < 18.5) {
-        return "Underweight"
-      } else if (BMI >= 18.5 && BMI < 25 ) {
-        return "Normal"
+        return "Underweight";
+      } else if (BMI >= 18.5 && BMI < 25) {
+        return "Normal";
       } else if (BMI >= 25 && BMI < 30) {
-        return "Overweight"
+        return "Overweight";
       } else if (BMI >= 30 && BMI < 40) {
-        return "Obese"
+        return "Obese";
       }
     }
   },
-  data () {
+  data() {
     return {
       musicList: [
         // { songTitle: "Basang Basa sa Ulan", artist: "Aegis" },
@@ -272,7 +270,7 @@ export default {
       name: "",
       weightRange: ""
       // calculatedBMI: 0
-    }
+    };
   }
-}
+};
 </script>
