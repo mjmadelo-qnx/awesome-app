@@ -27,6 +27,8 @@
             <q-input outlined v-model="name" label="Full Name" />
             <q-input outlined v-model="height" label="Height (in m)" />
             <q-input outlined v-model="weight" label="Weight (in kg)" />
+            <p>BMI = {{ showCalculatedBMI() }}</p>
+            <p>BMI Range = {{ showWeightRange(showCalculatedBMI()) }}</p>
           <q-separator />
 
           <q-card-actions vertical>
