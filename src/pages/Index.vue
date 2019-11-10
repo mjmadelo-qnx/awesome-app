@@ -32,7 +32,7 @@
           <q-separator />
 
           <q-card-actions vertical>
-            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : showCalculatedBMI()"/>
+            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : updateBmi()"/>
           </q-card-actions>
         </q-card>
 
@@ -66,14 +66,14 @@
 
           <q-item class="musicList" clickable v-ripple v-for="(bmi, index) in bmiList" :key="index">
             <q-item-section>
-              <q-item-label>{{ index+1 }}: {{ bmi.name }} - {{ bmi.result }}</q-item-label>
-              <q-item-label caption>Height: {{ bmi.height }}, Weight: {{ bmi.weight }} ({{ bmi.weightRange }})</q-item-label>
+              <q-item-label>{{ index+1 }}: {{ bmi.name }} - {{ bmi.result }} ({{ bmi.weightRange }})</q-item-label>
+              <q-item-label caption>Height: {{ bmi.height }}, Weight: {{ bmi.weight }} </q-item-label>
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
-              <q-btn color="primary" icon="edit" @click="editMusic(music, music.id)"/>
+              <q-btn color="primary" icon="edit" @click="editBmi(bmi, bmi.id)"/>
               <!-- delete -->
-              <q-btn color="red" icon="delete" @click="deleteMusic(music.id)"/>
+              <q-btn color="red" icon="delete" @click="deleteBmi(bmi.id)"/>
             </q-item-section>
           </q-item>
 
@@ -159,6 +159,17 @@ export default {
       this.edit = true;
       this.index = i;
     },
+    editBmi (d, i) {
+      // this.artist = d.artist;
+      // this.songTitle = d.songTitle;
+
+      this.name = d.name;
+      this.height = d.height;
+      this.weight = d.weight;
+
+      this.edit = true;
+      this.index = i;
+    },
     deleteMusic (i) {
       // app4.todos.splice(<starting index>, <number of index deletes>)
       // delete static
@@ -181,6 +192,28 @@ export default {
       // this.$set(this.musicList, this.index, obj);
 
       this.$db.collection("musicList")
+      .doc(this.index)
+      .update(obj);
+      this.cancelEdit();
+
+      // 
+    },
+    updateBmi () {
+      var obj = {
+        name: this.name,
+        height: this.height,
+        weight: this.weight,
+        result: this.weight/(this.height*this.height),
+        weightRange: this.showWeightRange(this.showCalculatedBMI())
+      };
+      // native assignment
+      // this.musicList[this.index] = obj;
+
+      // vue assignment variable (static)
+      // vue.set(variable, index number, value)
+      // this.$set(this.musicList, this.index, obj);
+
+      this.$db.collection("ibmList")
       .doc(this.index)
       .update(obj);
       this.cancelEdit();
