@@ -192,8 +192,8 @@ export default {
       calculatedBmi: "",
       index: null,
       edit: false,
-      height: 1.88,
-      weight: 95,
+      height: 0,
+      weight: 0,
       name: "",
       // calculatedBMI: 0
     }
