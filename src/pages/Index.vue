@@ -84,9 +84,9 @@
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
-              <q-btn color="primary" icon="edit" @click="editMusic(music, music.id)"/>
+              <q-btn color="primary" icon="edit" @click="editMusic(bmi, bmi.id)"/>
               <!-- delete -->
-              <q-btn color="red" icon="delete" @click="deleteMusic(music.id)"/>
+              <q-btn color="red" icon="delete" @click="deleteMusic(bmi.id)"/>
             </q-item-section>
           </q-item>
 
@@ -179,7 +179,7 @@ export default {
 
       // delete (firestore)
       // delete from musicList where id = i (from function parameter)
-      this.$db.collection("musicList").doc(i).delete();
+      this.$db.collection("bmiList").doc(i).delete();
     },
     updateMusic () {
       var obj = {
