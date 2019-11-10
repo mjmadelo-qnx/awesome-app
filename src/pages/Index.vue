@@ -48,7 +48,7 @@
         
         
         
-        <q-list bordered separator>
+        <q-list bordered separator style="margin-top: 10px;">
 
           <q-item class="musicList" clickable v-ripple v-for="(music, index) in musicList" :key="index">
             <q-item-section>
