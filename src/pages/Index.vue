@@ -9,9 +9,7 @@
 
         <!-- computed object declarative rendering -->
         <!-- {{ showSongAndArtist }} -->
-        <!-- height = {{height}}
-        weight = {{weight}}
-        BMI = {{ showCalculatedBMI() }} -->
+        
         <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
         {{ showSongAndArtist }} -->
@@ -33,6 +31,21 @@
 
           <q-card-actions vertical>
             <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : showCalculatedBMI()"/>
+          </q-card-actions>
+        </q-card>
+
+        <q-card class="my-card" style="margin-top: 24px;">
+          <q-card-section>
+            <div class="text-h6">Calculated BMI</div>
+            <p>height = {{height}}</p>
+            <p>weight = {{weight}}</p>
+            <p>BMI = {{ showCalculatedBMI() }}</p>
+          </q-card-section>
+            
+          <q-separator />
+
+          <q-card-actions vertical>
+            
           </q-card-actions>
         </q-card>
 
