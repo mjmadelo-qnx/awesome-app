@@ -2,16 +2,38 @@
   <q-page class="flex flex-center">
     <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg"> -->
     <template>
-      <div class="q-pa-md" style="max-width: 350px">
-        <q-list bordered separator>
-          
+      <div class="q-pa-md" style="max-width: 450px">
+        <h2>Music Library</h2>
+        <!-- {{ artist }} -->
+        <q-input outlined v-model="artist" label="Artist" />
+        <q-input outlined v-model="songTitle" label="Song Name" />
+        <!-- first way -->
+        <!-- <q-btn v-if="!edit" color="secondary" class="full-width" label="Add Music" @click="addMusic()"/>
+        <q-btn v-else color="secondary" class="full-width" label="Add Music" @click="addMusic()"/> -->
 
-          <q-item clickable v-ripple>
+        <!-- ternary operator syntax -->
+        <!-- condition ? true result : false result -->
+        <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Add Music' : 'Update Music'" @click="!edit ? addMusic() : updateMusic()"/>
+        <q-list bordered separator>
+
+          <q-item class="musicList" clickable v-ripple v-for="(music, index) in musicList" :key="index">
             <q-item-section>
-              <q-item-label>Basang Basa sa Ulan</q-item-label>
-              <q-item-label caption>Aegis</q-item-label>
+              <q-item-label>{{ index+1 }}: {{ music.songTitle }}</q-item-label>
+              <q-item-label caption>{{ music.artist }}</q-item-label>
             </q-item-section>
+            <q-item-section right>
+              <!-- edit -->
+              <q-btn color="primary" icon="edit" @click="editMusic(music, index)"/>
+              <!-- delete -->
+              <q-btn color="red" icon="delete" @click="deleteMusic(index)"/>
+            </q-item-section>
+
           </q-item>
+
+          <!-- <q-item-section right>
+            <q-btn color="primary" label="Add Music" @click="addMusic()"/>
+            <q-btn color="secondary" label="Add Music" @click="addMusic()"/>
+          </q-item-section> -->
 
         </q-list>
       </div>
@@ -19,8 +41,70 @@
   </q-page>
 </template>
 
+<style scoped>
+  .q-item .musicList {
+      padding: 8px 0px 8px 16px;
+  }
+</style>
+
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  methods: {
+    addMusic () {
+      // use this kapag nasa loob ng script
+      var obj = {
+        artist: this.artist,
+        songTitle: this.songTitle
+      };
+      this.musicList.push(obj);
+      this.artist = "";
+      this.songTitle = "";
+    },
+    cancelEdit () {
+      this.artist = "";
+      this.songTitle = "";
+      this.edit = false;
+      this.index = null;
+    },
+    editMusic (d, i) {
+      this.artist = d.artist;
+      this.songTitle = d.songTitle;
+      this.edit = true;
+      this.index = i;
+    },
+    deleteMusic (i) {
+      // app4.todos.splice(<starting index>, <number of index deletes>)
+      this.musicList.splice(i, 1);
+    },
+    updateMusic () {
+      var obj = {
+        artist: this.artist,
+        songTitle: this.songTitle
+      };
+      // native assignment
+      // this.musicList[this.index] = obj;
+
+      // vue assignment variable
+      // vue.set(variable, index number, value)
+      this.$set(this.musicList, this.index, obj);
+      this.cancelEdit();
+
+
+    }
+  },
+  data () {
+    return {
+      musicList: [
+        { songTitle: "Basang Basa sa Ulan", artist: "Aegis" },
+        { songTitle: "Reflection", artist: "Leah Salonga" },
+        { songTitle: "Where is the Love?", artist: "Black Eyed Peas" }
+      ],
+      artist: "",
+      songTitle: "",
+      index: null,
+      edit: false
+    }
+  }
 }
 </script>
