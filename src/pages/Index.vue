@@ -67,7 +67,7 @@
           <q-item class="musicList" clickable v-ripple v-for="(bmi, index) in bmiList" :key="index">
             <q-item-section>
               <q-item-label>{{ index+1 }}: {{ bmi.name }} - {{ bmi.result }}</q-item-label>
-              <q-item-label caption>Height: {{ bmi.height }}, Weight: {{ bmi.weight }}</q-item-label>
+              <q-item-label caption>Height: {{ bmi.height }}, Weight: {{ bmi.weight }} ({{ bmi.weightRange }})</q-item-label>
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
@@ -137,7 +137,8 @@ export default {
         name: this.name,
         height: this.height,
         weight: this.weight,
-        result: this.weight/(this.height*this.height)
+        result: this.weight/(this.height*this.height),
+        weightRange: this.showWeightRange(this.showCalculatedBMI())
       };
       this.$db.collection("bmiList").add(obj);
       this.cancelEdit();
