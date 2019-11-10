@@ -12,9 +12,9 @@
         height = {{height}}
         weight = {{weight}}
         BMI = {{ showCalculatedBMI() }}
-        <q-input outlined v-model="artist" label="Artist" />
+        <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
-        {{ showSongAndArtist }}
+        {{ showSongAndArtist }} -->
 
         <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" /> -->
@@ -25,12 +25,12 @@
             <!-- <div class="text-subtitle2">by John Doe</div> -->
           </q-card-section>
             <q-input outlined v-model="name" label="Full Name" />
-            <q-input outlined v-model="height" label="Height (in cm)" />
+            <q-input outlined v-model="height" label="Height (in m)" />
             <q-input outlined v-model="weight" label="Weight (in kg)" />
           <q-separator />
 
           <q-card-actions vertical>
-            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? calculateBmi() : updateBmi()"/>
+            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? showCalculatedBMI() : showCalculatedBMI()"/>
           </q-card-actions>
         </q-card>
 
@@ -107,8 +107,13 @@ export default {
       return (this.songTitle && this.artist ? this.songTitle + " by " + this.artist : '');
     }
   },
+  // calculatedBmi: {
+  //   showCalculatedBMI () {
+  //     return (this.weight/(this.height*this.height));
+  //   }
+  // },
   created () {
-    this.$bind("musicList", this.$db.collection("musicList"));
+    this.$bind("musicList", this.$db.collection("bmiList"));
   },
   // for void
   methods: {
@@ -131,7 +136,7 @@ export default {
         height: this.height,
         weight: this.weight
       };
-      this.$db.collection("musicList").add(obj);
+      this.$db.collection("bmiList").add(obj);
       this.cancelEdit();
     },
     cancelEdit () {
@@ -179,6 +184,7 @@ export default {
       // 
     },
     showCalculatedBMI () {
+      console.log("hey!");
       return (this.weight/(this.height*this.height));
     }
   },
