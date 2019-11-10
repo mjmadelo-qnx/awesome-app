@@ -9,9 +9,7 @@
 
         <!-- computed object declarative rendering -->
         <!-- {{ showSongAndArtist }} -->
-        <!-- height = {{height}}
-        weight = {{weight}}
-        BMI = {{ showCalculatedBMI() }} -->
+        
         <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
         {{ showSongAndArtist }} -->
@@ -32,7 +30,22 @@
           <q-separator />
 
           <q-card-actions vertical>
-            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : updateBmi()"/>
+            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : editBmi()"/>
+          </q-card-actions>
+        </q-card>
+
+        <q-card class="my-card" style="margin-top: 24px;">
+          <q-card-section>
+            <div class="text-h6">Calculated BMI</div>
+            <p>height = {{height}}</p>
+            <p>weight = {{weight}}</p>
+            <p>BMI = {{ showCalculatedBMI() }}</p>
+          </q-card-section>
+            
+          <q-separator />
+
+          <q-card-actions vertical>
+            
           </q-card-actions>
         </q-card>
 
@@ -50,7 +63,7 @@
         
         
         <q-list bordered separator style="margin-top: 10px;">
-
+          <h4 class="text-center">Your BMI History</h4>
           <q-item class="musicList" clickable v-ripple v-for="(music, index) in musicList" :key="index">
             <q-item-section>
               <q-item-label>{{ index+1 }}: {{ music.songTitle }}</q-item-label>
@@ -73,7 +86,7 @@
               <!-- edit -->
               <q-btn color="primary" icon="edit" @click="editBmi(bmi, bmi.id)"/>
               <!-- delete -->
-              <q-btn color="red" icon="delete" @click="deleteBmi(bmi.id)"/>
+              <q-btn color="red" icon="delete" @click="deleteMusic(bmi.id)"/>
             </q-item-section>
           </q-item>
 
@@ -177,7 +190,7 @@ export default {
 
       // delete (firestore)
       // delete from musicList where id = i (from function parameter)
-      this.$db.collection("musicList").doc(i).delete();
+      this.$db.collection("bmiList").doc(i).delete();
     },
     updateMusic () {
       var obj = {
