@@ -9,9 +9,9 @@
 
         <!-- computed object declarative rendering -->
         <!-- {{ showSongAndArtist }} -->
-        height = {{height}}
+        <!-- height = {{height}}
         weight = {{weight}}
-        BMI = {{ showCalculatedBMI() }}
+        BMI = {{ showCalculatedBMI() }} -->
         <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
         {{ showSongAndArtist }} -->
