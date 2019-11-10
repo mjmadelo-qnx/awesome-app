@@ -28,9 +28,9 @@
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
-              <q-btn color="primary" icon="edit" @click="editMusic(music, index)"/>
+              <q-btn color="primary" icon="edit" @click="editMusic(music, music.id)"/>
               <!-- delete -->
-              <q-btn color="red" icon="delete" @click="deleteMusic(index)"/>
+              <q-btn color="red" icon="delete" @click="deleteMusic(music.id)"/>
             </q-item-section>
 
           </q-item>
@@ -62,6 +62,10 @@ export default {
       return (this.songTitle && this.artist ? this.songTitle + " by " + this.artist : '');
     }
   },
+  created () {
+    this.$bind("musicList", this.$db.collection("musicList"));
+  },
+  // for void
   methods: {
     addMusic () {
       // use this kapag nasa loob ng script
@@ -69,10 +73,11 @@ export default {
         artist: this.artist,
         songTitle: this.songTitle
       };
-      this.musicList.push(obj);
-      this.artist = "";
-      this.songTitle = "";
-      this.$router.push('/login')
+      // adding (static)
+      // this.musicList.push(obj);
+      this.$db.collection("musicList").add(obj);
+      this.cancelEdit();
+      // this.$router.push('/login');
     },
     cancelEdit () {
       this.artist = "";
@@ -88,7 +93,12 @@ export default {
     },
     deleteMusic (i) {
       // app4.todos.splice(<starting index>, <number of index deletes>)
-      this.musicList.splice(i, 1);
+      // delete static
+      // this.musicList.splice(i, 1);
+
+      // delete (firestore)
+      // delete from musicList where id = i (from function parameter)
+      this.$db.collection("musicList").doc(i).delete();
     },
     updateMusic () {
       var obj = {
@@ -98,20 +108,24 @@ export default {
       // native assignment
       // this.musicList[this.index] = obj;
 
-      // vue assignment variable
+      // vue assignment variable (static)
       // vue.set(variable, index number, value)
-      this.$set(this.musicList, this.index, obj);
+      // this.$set(this.musicList, this.index, obj);
+
+      this.$db.collection("musicList")
+      .doc(this.index)
+      .update(obj);
       this.cancelEdit();
 
-
+      // 
     }
   },
   data () {
     return {
       musicList: [
-        { songTitle: "Basang Basa sa Ulan", artist: "Aegis" },
-        { songTitle: "Reflection", artist: "Leah Salonga" },
-        { songTitle: "Where is the Love?", artist: "Black Eyed Peas" }
+        // { songTitle: "Basang Basa sa Ulan", artist: "Aegis" },
+        // { songTitle: "Reflection", artist: "Leah Salonga" },
+        // { songTitle: "Where is the Love?", artist: "Black Eyed Peas" }
       ],
       artist: "",
       songTitle: "",
