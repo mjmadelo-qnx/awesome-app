@@ -71,7 +71,7 @@
           <q-item class="musicList" clickable v-ripple v-for="(bmi, index) in bmiList" :key="index">
             <q-item-section>
               <q-item-label>{{ index+1 }}: {{ bmi.name }} - {{ bmi.result }} ({{ bmi.weightRange }})</q-item-label>
-              <q-item-label caption>Height: {{ bmi.height }}, Weight: {{ bmi.weight }} </q-item-label>
+              <q-item-label caption>Height: {{ bmi.height }} m, Weight: {{ bmi.weight }} kg </q-item-label>
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
