@@ -117,6 +117,10 @@ export default {
       this.songTitle = "";
       this.edit = false;
       this.index = null;
+
+      this.name = "";
+      this.height = "";
+      this.weight = "";
     },
     editMusic (d, i) {
       this.artist = d.artist;
