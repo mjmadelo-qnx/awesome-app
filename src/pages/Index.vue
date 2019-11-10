@@ -19,9 +19,20 @@
         <!-- <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" /> -->
 
-        <q-input outlined v-model="name" label="Full Name" />
-        <q-input outlined v-model="height" label="Height (in cm)" />
-        <q-input outlined v-model="weight" label="Weight (in kg)" />
+        <q-card class="my-card">
+          <q-card-section>
+            <div class="text-h6">Personal Information</div>
+            <!-- <div class="text-subtitle2">by John Doe</div> -->
+          </q-card-section>
+            <q-input outlined v-model="name" label="Full Name" />
+            <q-input outlined v-model="height" label="Height (in cm)" />
+            <q-input outlined v-model="weight" label="Weight (in kg)" />
+          <q-separator />
+
+          <q-card-actions vertical>
+            <q-btn color="primary" class="full-width" label="Calculate BMI" @click="calculateBmi()"/>
+          </q-card-actions>
+        </q-card>
 
         <!-- first way -->
         <!-- <q-btn v-if="!edit" color="secondary" class="full-width" label="Add Music" @click="addMusic()"/>
@@ -31,8 +42,6 @@
         <!-- condition ? true result : false result -->
         <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Add Music' : 'Update Music'" @click="!edit ? addMusic() : updateMusic()"/> -->
       
-        
-        <q-btn color="primary" class="full-width" label="Calculate BMI" @click="calculateBmi()"/>
         
         
         
