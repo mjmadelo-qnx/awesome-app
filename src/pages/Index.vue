@@ -26,7 +26,7 @@
         <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Add Music' : 'Update Music'" @click="!edit ? addMusic() : updateMusic()"/> -->
       
         
-        <q-btn color="primary" class="full-width" label="Calculate BMI" @click="calculateBmi()"/>
+        <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="calculateBmi()"/>
         
         
         
