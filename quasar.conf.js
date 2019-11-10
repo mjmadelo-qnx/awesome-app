@@ -31,6 +31,9 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
+      // config: {
+      //   dark: true,
+      // },
       // iconSet: 'ionicons-v4', // Quasar icon set
       // lang: 'de', // Quasar language pack
 
