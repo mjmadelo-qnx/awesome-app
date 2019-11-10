@@ -31,7 +31,7 @@
           <q-separator />
 
           <q-card-actions vertical>
-            <q-btn color="primary" class="full-width" label="Calculate BMI" @click="calculateBmi()"/>
+            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? calculateBmi() : updateBmi()"/>
           </q-card-actions>
         </q-card>
 
@@ -43,6 +43,8 @@
         <!-- condition ? true result : false result -->
         <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Add Music' : 'Update Music'" @click="!edit ? addMusic() : updateMusic()"/> -->
       
+        
+        <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="calculateBmi()"/> -->
         
         
         
@@ -138,6 +140,10 @@ export default {
       this.songTitle = "";
       this.edit = false;
       this.index = null;
+
+      this.name = "";
+      this.height = "";
+      this.weight = "";
     },
     editMusic (d, i) {
       this.artist = d.artist;
