@@ -9,10 +9,9 @@
 
         <!-- computed object declarative rendering -->
         <!-- {{ showSongAndArtist }} -->
-        height = {{height}}
-        weight = {{weight}}
-        BMI = {{ showCalculatedBMI() }}
-        BMI Range = {{ showWeightRange(showCalculatedBMI()) }}
+        <!-- height = {{height}}
+        weight = {{weight}} -->
+       
         <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
         {{ showSongAndArtist }}
@@ -26,8 +25,10 @@
             <!-- <div class="text-subtitle2">by John Doe</div> -->
           </q-card-section>
             <q-input outlined v-model="name" label="Full Name" />
-            <q-input outlined v-model="height" label="Height (in cm)" />
+            <q-input outlined v-model="height" label="Height (in m)" />
             <q-input outlined v-model="weight" label="Weight (in kg)" />
+            <p>BMI = {{ showCalculatedBMI() }}</p>
+            <p>BMI Range = {{ showWeightRange(showCalculatedBMI()) }}</p>
           <q-separator />
 
           <q-card-actions vertical>
