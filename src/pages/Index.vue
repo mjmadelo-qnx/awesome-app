@@ -3,7 +3,7 @@
     <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg"> -->
     <template>
       <div class="q-pa-md" style="max-width: 450px">
-        <h2>Music Library</h2>
+        <h2>BMI Calculator</h2>
         <!-- more direct declarative rendering -->
         <!-- {{ songTitle }} by {{ artist }} -->
 
