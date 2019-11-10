@@ -30,7 +30,7 @@
           <q-separator />
 
           <q-card-actions vertical>
-            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? showCalculatedBMI() : showCalculatedBMI()"/>
+            <q-btn :color="!edit ? 'primary' : 'secondary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="!edit ? addBmi() : showCalculatedBMI()"/>
           </q-card-actions>
         </q-card>
 
@@ -47,7 +47,7 @@
         
         
         
-        <q-list bordered separator>
+        <q-list bordered separator style="margin-top: 10px;">
 
           <q-item class="musicList" clickable v-ripple v-for="(music, index) in musicList" :key="index">
             <q-item-section>
@@ -65,7 +65,7 @@
           <q-item class="musicList" clickable v-ripple v-for="(bmi, index) in bmiList" :key="index">
             <q-item-section>
               <q-item-label>{{ index+1 }}: {{ bmi.name }} - {{ bmi.result }}</q-item-label>
-              <q-item-label caption>Height: {{ music.height }}, Weight: {{ music.weight }}</q-item-label>
+              <q-item-label caption>Height: {{ bmi.height }}, Weight: {{ bmi.weight }}</q-item-label>
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
@@ -113,7 +113,7 @@ export default {
   //   }
   // },
   created () {
-    this.$bind("musicList", this.$db.collection("bmiList"));
+    this.$bind("bmiList", this.$db.collection("bmiList"));
   },
   // for void
   methods: {
@@ -134,7 +134,8 @@ export default {
       var obj = {
         name: this.name,
         height: this.height,
-        weight: this.weight
+        weight: this.weight,
+        result: this.weight/(this.height*this.height)
       };
       this.$db.collection("bmiList").add(obj);
       this.cancelEdit();
@@ -186,6 +187,21 @@ export default {
     showCalculatedBMI () {
       console.log("hey!");
       return (this.weight/(this.height*this.height));
+    },
+    showWeightRange (BMI) {
+      // below 18.5 – you're in the underweight range
+      // between 18.5 and 24.9 – you're in the healthy weight range
+      // between 25 and 29.9 – you're in the overweight range
+      // between 30 and 39.9 – you're in the obese range 
+      if (BMI < 18.5) {
+        return "Underweight"
+      } else if (BMI >= 18.5 && BMI < 25 ) {
+        return "Normal"
+      } else if (BMI >= 25 && BMI < 30) {
+        return "Overweight"
+      } else if (BMI >= 30 && BMI < 40) {
+        return "Obese"
+      }
     }
   },
   data () {
@@ -204,9 +220,10 @@ export default {
       calculatedBmi: "",
       index: null,
       edit: false,
-      height: 1.88,
-      weight: 95,
+      height: 0,
+      weight: 0,
       name: "",
+      weightRange: ""
       // calculatedBMI: 0
     }
   }
