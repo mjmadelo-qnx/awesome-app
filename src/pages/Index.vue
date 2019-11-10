@@ -12,6 +12,9 @@
 
         <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
+
+        
+
         <!-- first way -->
         <!-- <q-btn v-if="!edit" color="secondary" class="full-width" label="Add Music" @click="addMusic()"/>
         <q-btn v-else color="primary" class="full-width" label="Update Music" @click="updateMusic()"/> -->
