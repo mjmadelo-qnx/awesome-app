@@ -8,6 +8,12 @@
         <!-- {{ songTitle }} by {{ artist }} -->
 
         <!-- computed object declarative rendering -->
+        <!-- {{ showSongAndArtist }} -->
+        height = {{height}}
+        weight = {{weight}}
+        BMI = {{ showCalculatedBMI() }}
+        <q-input outlined v-model="artist" label="Artist" />
+        <q-input outlined v-model="songTitle" label="Song Name" />
         {{ showSongAndArtist }}
 
         <!-- <q-input outlined v-model="artist" label="Artist" />
@@ -90,6 +96,11 @@
 export default {
   name: 'PageIndex',
   // have a returned value
+  // calculateBMI: {
+  //   showCalculatedBMI () {
+  //     return (this.weight/(this.height*this.height));
+  //   }
+  // },
   computed: {
     // void
     showSongAndArtist () {
@@ -166,6 +177,9 @@ export default {
       this.cancelEdit();
 
       // 
+    },
+    showCalculatedBMI () {
+      return (this.weight/(this.height*this.height));
     }
   },
   data () {
@@ -183,7 +197,11 @@ export default {
       weight: "",
       calculatedBmi: "",
       index: null,
-      edit: false
+      edit: false,
+      height: 1.88,
+      weight: 95,
+      name: "",
+      // calculatedBMI: 0
     }
   }
 }
