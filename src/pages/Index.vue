@@ -47,7 +47,7 @@
 
         <!-- <q-btn :color="!edit ? 'secondary' : 'primary'" class="full-width" :label="!edit ? 'Calculate BMI' : 'Edit BMI'" @click="calculateBmi()"/> -->
 
-        <q-list bordered separator style="margin-top: 10px;">
+        <q-list bordered separator style="margin-top: 10px; padding: 20px;">
           <h4 class="text-center">Your BMI History</h4>
           <q-item
             class="musicList"
