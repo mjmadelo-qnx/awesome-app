@@ -4,12 +4,17 @@
     <template>
       <div class="q-pa-md" style="max-width: 450px">
         <h2>Music Library</h2>
-        <!-- {{ artist }} -->
+        <!-- more direct declarative rendering -->
+        <!-- {{ songTitle }} by {{ artist }} -->
+
+        <!-- computed object declarative rendering -->
+        {{ showSongAndArtist }}
+
         <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
         <!-- first way -->
         <!-- <q-btn v-if="!edit" color="secondary" class="full-width" label="Add Music" @click="addMusic()"/>
-        <q-btn v-else color="secondary" class="full-width" label="Add Music" @click="addMusic()"/> -->
+        <q-btn v-else color="primary" class="full-width" label="Update Music" @click="updateMusic()"/> -->
 
         <!-- ternary operator syntax -->
         <!-- condition ? true result : false result -->
@@ -41,15 +46,22 @@
   </q-page>
 </template>
 
-<style scoped>
-  .q-item .musicList {
-      padding: 8px 0px 8px 16px;
+<style>
+  .musicList {
+      padding: 8px 0px 8px 16px !important;
   }
 </style>
 
 <script>
 export default {
   name: 'PageIndex',
+  // have a returned value
+  computed: {
+    // void
+    showSongAndArtist () {
+      return (this.songTitle && this.artist ? this.songTitle + " by " + this.artist : '');
+    }
+  },
   methods: {
     addMusic () {
       // use this kapag nasa loob ng script
@@ -60,6 +72,7 @@ export default {
       this.musicList.push(obj);
       this.artist = "";
       this.songTitle = "";
+      this.$router.push('/login')
     },
     cancelEdit () {
       this.artist = "";

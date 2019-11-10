@@ -1,10 +1,19 @@
 
 const routes = [
   {
-    path: '/',
+    path: '',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: '/', component: () => import('pages/Index.vue') },
+      { path: '/login', component: () => import('pages/login.vue') }
+    ]
+  },
+  {
+    path: '',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '/admin/dashboard', component: () => import('pages/admin/dashboard.vue') },
+      { path: '/admin/reports/:report_no', component: () => import('pages/admin/reports.vue') }   
     ]
   }
 ]
