@@ -12,6 +12,7 @@
         height = {{height}}
         weight = {{weight}}
         BMI = {{ showCalculatedBMI() }}
+        BMI Range = {{ showWeightRange(showCalculatedBMI()) }}
         <q-input outlined v-model="artist" label="Artist" />
         <q-input outlined v-model="songTitle" label="Song Name" />
         {{ showSongAndArtist }}
@@ -174,6 +175,21 @@ export default {
     },
     showCalculatedBMI () {
       return (this.weight/(this.height*this.height));
+    },
+    showWeightRange (BMI) {
+      // below 18.5 – you're in the underweight range
+      // between 18.5 and 24.9 – you're in the healthy weight range
+      // between 25 and 29.9 – you're in the overweight range
+      // between 30 and 39.9 – you're in the obese range 
+      if (BMI < 18.5) {
+        return "Underweight"
+      } else if (BMI >= 18.5 && BMI < 25 ) {
+        return "Normal"
+      } else if (BMI >= 25 && BMI < 30) {
+        return "Overweight"
+      } else if (BMI >= 30 && BMI < 40) {
+        return "Obese"
+      }
     }
   },
   data () {
@@ -195,6 +211,7 @@ export default {
       height: 0,
       weight: 0,
       name: "",
+      weightRange: ""
       // calculatedBMI: 0
     }
   }
