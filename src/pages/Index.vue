@@ -25,8 +25,6 @@
             <q-input outlined v-model="name" label="Full Name" />
             <q-input outlined v-model="height" label="Height (in m)" />
             <q-input outlined v-model="weight" label="Weight (in kg)" />
-            <p>BMI = {{ showCalculatedBMI() }}</p>
-            <p>BMI Range = {{ showWeightRange(showCalculatedBMI()) }}</p>
           <q-separator />
 
           <q-card-actions vertical>
@@ -71,7 +69,7 @@
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
-              <q-btn color="primary" icon="edit" @click="editMusic(music, music.id)"/>
+              <!-- <q-btn color="primary" icon="edit" @click="editMusic(music, music.id)"/> -->
               <!-- delete -->
               <q-btn color="red" icon="delete" @click="deleteMusic(music.id)"/>
             </q-item-section>
@@ -84,7 +82,7 @@
             </q-item-section>
             <q-item-section right>
               <!-- edit -->
-              <q-btn color="primary" icon="edit" @click="editBmi(bmi, bmi.id)"/>
+              <!-- <q-btn color="primary" icon="edit" @click="editBmi(bmi, bmi.id)"/> -->
               <!-- delete -->
               <q-btn color="red" icon="delete" @click="deleteMusic(bmi.id)"/>
             </q-item-section>
